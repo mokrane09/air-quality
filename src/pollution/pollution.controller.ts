@@ -1,4 +1,4 @@
-import { Body, Controller, Get, HttpCode, HttpStatus, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, Get, HttpCode, HttpStatus, ValidationPipe, Logger } from '@nestjs/common';
 import { ApiBody, ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { ErrorResponseDto, SuccessResponseDto } from './dto/response-dto';
 import { CoordinatesDto } from './dto/coordinates-dto';
@@ -7,7 +7,8 @@ import { PollutionService } from './services/pollution.service';
 @Controller('pollution')
 export class PollutionController {
   constructor(private readonly PollutionService: PollutionService) {}
-
+  private readonly logger = new Logger(PollutionController.name);
+  
   @Get('')
 
   @ApiBody({
@@ -24,12 +25,17 @@ export class PollutionController {
     ) {
     
     try {
+      this.logger.log('GET_POLLUTION_IN_NEARBY_CITY_START |' + JSON.stringify(coordinatesDto))
+      
       const result = await this.PollutionService.getPollutionInNearestCityToCoordinates(coordinatesDto.longitude, coordinatesDto.latitude);
-
+      
+      this.logger.log('GET_POLLUTION_IN_NEARBY_CITY_SUCCESS |' + JSON.stringify(coordinatesDto))
+      
       return new SuccessResponseDto(result);
-    } catch (e) {
+    } catch (error) {
+      this.logger.error('GET_POLLUTION_IN_NEARBY_CITY_ERROR | ' + JSON.stringify(coordinatesDto))
 
-      return new ErrorResponseDto("Pollution ");
+      return new ErrorResponseDto("Error : polution data cannot be retrieved.");
     }
   }
 }
