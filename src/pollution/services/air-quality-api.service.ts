@@ -1,5 +1,4 @@
 import { Injectable } from '@nestjs/common';
-import { PollutionData } from '../types/pollution'; 
 import axios from 'axios';
 
 @Injectable()
