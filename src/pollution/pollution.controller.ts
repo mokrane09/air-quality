@@ -1,5 +1,6 @@
-import { Controller, Get, Param } from '@nestjs/common';
+import { Body, Controller, Get, ValidationPipe } from '@nestjs/common';
 import { ErrorResponseDto, SuccessResponseDto } from 'src/common/helpers/response-dto';
+import { CoordinatesDto } from './dto/coordinates-dto';
 import { PollutionService } from './services/pollution.service';
 
 @Controller('pollution')
@@ -8,19 +9,18 @@ export class PollutionController {
 
   @Get('')
   async getPollutionInNearestCity(
-    @Param('longitude') longitude: number,
-    @Param('latitude') latitude: number
+    @Body(new ValidationPipe({
+        whitelist: true
+      })) coordinatesDto: CoordinatesDto
     ) {
     
     try {
-      const result = await this.PollutionService.getPollutionInNearestCityToCoordinates(longitude, latitude);
+      const result = await this.PollutionService.getPollutionInNearestCityToCoordinates(coordinatesDto.longitude, coordinatesDto.latitude);
 
       return new SuccessResponseDto(result);
     } catch (e) {
 
-      return new ErrorResponseDto("result");
+      return new ErrorResponseDto("Pollution ");
     }
-    
   }
-
 }
