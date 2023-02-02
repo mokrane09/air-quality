@@ -11,7 +11,7 @@ async function bootstrap() {
   // BEGIN Swagger Setup
   const config = new DocumentBuilder()
 
-  // TODO put the strings in constants json
+    // TODO put the strings in constants json
     .setTitle('Air Quality API')
     .setDescription('The air pollution API documentation')
     .setVersion('1.0')

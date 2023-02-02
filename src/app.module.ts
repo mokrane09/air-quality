@@ -5,9 +5,9 @@ import { PollutionModule } from './pollution/pollution.module';
 
 @Module({
   imports: [
-    PollutionModule, 
+    PollutionModule,
     ScheduleModule.forRoot(),
-    MongooseModule.forRoot(process.env.MONGODB_URL)
+    MongooseModule.forRoot(process.env.MONGODB_URL),
   ],
   controllers: [],
   providers: [],

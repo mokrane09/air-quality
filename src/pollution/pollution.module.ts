@@ -8,13 +8,9 @@ import { PollutionSchema } from './schema/pollution.schema';
 
 @Module({
   controllers: [PollutionController],
-  providers: [
-    PollutionService, 
-    AirQualityApiService,
-    ParisAirQualityCron
-  ],
+  providers: [PollutionService, AirQualityApiService, ParisAirQualityCron],
   imports: [
-    MongooseModule.forFeature([{ name: 'Pollution', schema: PollutionSchema }])
-  ]
+    MongooseModule.forFeature([{ name: 'Pollution', schema: PollutionSchema }]),
+  ],
 })
 export class PollutionModule {}
