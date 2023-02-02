@@ -1,21 +1,20 @@
 import { Injectable, Logger } from '@nestjs/common';
-import { InjectModel } from '@nestjs/mongoose';
 import { Cron, CronExpression } from '@nestjs/schedule';
-import { Model } from 'mongoose';
-import { Pollution, PollutionDocument } from '../schema/pollution.schema';
+import { PollutionRepository } from '../pollution.repository';
 import { PollutionService } from '../services/pollution.service';
 
 @Injectable()
 export class ParisAirQualityCron {
   private readonly logger = new Logger(ParisAirQualityCron.name);
   private readonly pollutionService: PollutionService;
+  private readonly pollutionRepository: PollutionRepository;
 
   constructor(
     pollutionService: PollutionService,
-    @InjectModel(Pollution.name)
-    private pollutionModel: Model<PollutionDocument>,
+    pollutionRepository: PollutionRepository,
   ) {
     this.pollutionService = pollutionService;
+    this.pollutionRepository = pollutionRepository;
   }
 
   @Cron(CronExpression.EVERY_MINUTE)
@@ -26,9 +25,6 @@ export class ParisAirQualityCron {
           2.352222,
           48.856613,
         );
-
-      const createdPollutionData = new this.pollutionModel(pollutionData);
-      await createdPollutionData.save();
 
       this.logger.log('Paris Pollution Data ' + JSON.stringify(pollutionData));
     } catch (error) {
