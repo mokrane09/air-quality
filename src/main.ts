@@ -9,10 +9,13 @@ async function bootstrap() {
 
   app.useGlobalPipes(new ValidationPipe());
 
-  // BEGIN Swagger Setup
-  const config = new DocumentBuilder()
+  swaggerSetup(app);
 
-    // TODO put the strings in constants json
+  await app.listen(process.env.APP_PORT);
+}
+
+function swaggerSetup(app) {
+  const config = new DocumentBuilder()
     .setTitle(constants.SWAGGER.TITLE)
     .setDescription(constants.SWAGGER.DESCRIPTION)
     .setVersion(constants.SWAGGER.VERSION)
@@ -20,10 +23,6 @@ async function bootstrap() {
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api-documentation', app, document);
-
-  await app.listen(process.env.APP_PORT);
 }
-
-// add swagger setup function here
 
 bootstrap();
