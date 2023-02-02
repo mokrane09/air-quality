@@ -1,4 +1,4 @@
-import { Body, Controller, Get, HttpStatus, Logger, Param, Query } from '@nestjs/common';
+import { Body, Controller, Get, HttpStatus, Logger, Param, Query, ValidationPipe } from '@nestjs/common';
 import { ApiBody, ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { ErrorResponseDto, SuccessResponseDto } from './dto/response-dto';
 import { CoordinatesDto } from './dto/coordinates-dto';
@@ -17,7 +17,11 @@ export class PollutionController {
   @ApiResponse({ status: HttpStatus.OK, description: 'Returns pollution data.' })
   @ApiResponse({ status: HttpStatus.BAD_REQUEST, description: 'Invalid id provided.'})
   async getPollutionInNearestCity(
-    @Query() coordinatesDto: CoordinatesDto
+    @Query(new ValidationPipe({
+      transform: true,
+      transformOptions: {enableImplicitConversion: true},
+      forbidNonWhitelisted: true
+    })) coordinatesDto: CoordinatesDto
     ) {
     
     try {
