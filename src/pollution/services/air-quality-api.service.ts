@@ -7,8 +7,7 @@ export class AirQualityApiService {
     longitude: number,
     latitude: number,
   ): Promise<any> {
-    const weatherApiBaseUrl = 'http://api.airvisual.com';
-    const endpoint = `${weatherApiBaseUrl}/v2/nearest_city?lat=${latitude}&lon=${longitude}&key=2880ff3a-e599-4ad3-b441-34f7438a8f25`;
+    const endpoint = `${process.env.IQAIR_API_BASE_URL}/v2/nearest_city?lat=${latitude}&lon=${longitude}&key=${process.env.IQAIR_API_KEY}`;
     const response = await axios.get(endpoint);
 
     const result = response.data.data;
