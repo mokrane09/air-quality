@@ -1,6 +1,6 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Cron } from '@nestjs/schedule';
+import { Cron, CronExpression } from '@nestjs/schedule';
 import { Model } from 'mongoose';
 import { Pollution, PollutionDocument } from '../schema/pollution.schema';
 import { PollutionService } from '../services/pollution.service';
@@ -18,7 +18,7 @@ export class ParisAirQualityCron {
     this.pollutionService = pollutionService;
   }
 
-  @Cron('0 * * * * *')
+  @Cron(CronExpression.EVERY_MINUTE)
   async saveParisAirQualityData() {
     try {
       const pollutionData =
