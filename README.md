@@ -31,6 +31,11 @@
 ```bash
 $ npm install
 ```
+ ## Swagger Documentation URL
+
+ ## Running the app using Docker
+
+ ## .ENV setup et BDD 
 
 ## Running the app
 

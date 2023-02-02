@@ -7,7 +7,7 @@ import { PollutionModule } from './pollution/pollution.module';
   imports: [
     PollutionModule, 
     ScheduleModule.forRoot(),
-    MongooseModule.forRoot('mongodb://localhost:27017/yassir')
+    MongooseModule.forRoot(process.env.MONGODB_URL)
   ],
   controllers: [],
   providers: [],
