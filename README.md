@@ -28,24 +28,35 @@
 
  ## Running The App
 
- First, created a `.env` file from the .env.example file
+ First, create a `.env` file from the `.env.example` file
 
+ Then, set the values of the environment variables
 
+`APP_PORT` the application port 
+`MONGODB_URL` : MongoDB connection string
+`IQAIR_API_KEY` : Your IQAIR API key, get it from https://www.iqair.com/fr/dashboard/api
+
+### Running With Docker
+
+In the `.env` file, make sure you set the value of the environment variable `MONGODB_EXTERNAL_PORT` to a port number that works for you, you can set it to `27018` if you have mongodb in your machine already running on port `27017`
+
+To run the application just run the command 
 
 ```bash
 $ docker-compose up
 ```
-## Installation
+
+You application will start running on watch mode and the url is `http://localhost:APP_PORT`
+
+### Running Without Docker
+
+First run the command 
 
 ```bash
 $ npm install
 ```
- ## Swagger Documentation URL
 
-
- ## .ENV setup et BDD 
-
-## Running the app
+Then you can use the one of the following commands
 
 ```bash
 # development
@@ -57,6 +68,10 @@ $ npm run start:dev
 # production mode
 $ npm run start:prod
 ```
+
+## Swagger Api Documentation 
+
+You can find the Swagger API documentation on the url `{base_url}/api-documentation`
 
 ## Test
 
@@ -71,16 +86,4 @@ $ npm run test:e2e
 $ npm run test:cov
 ```
 
-## Support
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
