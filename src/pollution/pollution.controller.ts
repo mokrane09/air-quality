@@ -73,10 +73,6 @@ export class PollutionController {
     description:
       'Returns date and time of the most polluted moment of the Paris zone.',
   })
-  @ApiResponse({
-    status: HttpStatus.BAD_REQUEST,
-    description: 'Invalid id provided.',
-  })
   async getMastPollutionDateTimeInParis() {
     try {
       this.logger.log('GET_MOST_POLLUTED_DATE_TIME_IN_PARIS_START');
