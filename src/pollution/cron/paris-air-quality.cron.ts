@@ -2,6 +2,7 @@ import { Injectable, Logger } from '@nestjs/common';
 import { Cron, CronExpression } from '@nestjs/schedule';
 import { PollutionRepository } from '../pollution.repository';
 import { PollutionService } from '../services/pollution.service';
+import * as constants from '../constants/constants.json';
 
 @Injectable()
 export class ParisAirQualityCron {
@@ -22,13 +23,13 @@ export class ParisAirQualityCron {
     try {
       const pollutionData =
         await this.pollutionService.getPollutionInNearestCityToCoordinates(
-          2.352222,
-          48.856613,
+          constants.CITIES.PARIS.LONGITUDE,
+          constants.CITIES.PARIS.LATITUDE,
         );
 
       const createPollutionDto = {
         ...pollutionData.Pollution,
-        city: 'Paris',
+        city: constants.CITIES.PARIS.NAME,
       };
       await this.pollutionRepository.storePollutionData(createPollutionDto);
 

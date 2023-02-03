@@ -1,3 +1,10 @@
 {
-    "IQAIR_API_BASE_URL": "http://api.airvisual.com"
+    "IQAIR_API_BASE_URL": "http://api.airvisual.com",
+    "CITIES": {
+        "PARIS": {
+            "NAME": "PARIS",
+            "LONGITUDE": 2.352222,
+            "LATITUDE": 48.856613
+        }
+    }
 }
