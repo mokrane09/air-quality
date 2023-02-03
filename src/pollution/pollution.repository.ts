@@ -13,7 +13,7 @@ export class PollutionRepository {
   ) {}
 
   async storePollutionData(pollutionData) {
-    this.logger.log('create pollution : ' + pollutionData);
+    this.logger.log('create pollution : ' + JSON.stringify(pollutionData));
 
     const pollution = new this.pollutionModel(pollutionData);
     await pollution.save();

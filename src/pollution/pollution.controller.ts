@@ -67,52 +67,31 @@ export class PollutionController {
   }
 
   @Get('max-pollution-date-time-paris')
-  @ApiBody({
-    type: CoordinatesDto,
-  })
-  @ApiOperation({ summary: 'Get pollution data' })
+  @ApiOperation({ summary: 'Get most polluted date time of the Paris zone' })
   @ApiResponse({
     status: HttpStatus.OK,
-    description: 'Returns pollution data.',
+    description:
+      'Returns date and time of the most polluted moment of the Paris zone.',
   })
   @ApiResponse({
     status: HttpStatus.BAD_REQUEST,
     description: 'Invalid id provided.',
   })
-  async getMastPollutionDateTimeInParis(
-    @Query(
-      new ValidationPipe({
-        transform: true,
-        transformOptions: { enableImplicitConversion: true },
-        forbidNonWhitelisted: true,
-      }),
-    )
-    coordinatesDto: CoordinatesDto,
-  ) {
+  async getMastPollutionDateTimeInParis() {
     try {
-      this.logger.log(
-        'GET_POLLUTION_IN_NEARBY_CITY_START |' + JSON.stringify(coordinatesDto),
-      );
+      this.logger.log('GET_MOST_POLLUTED_DATE_TIME_IN_PARIS_START');
 
       const result =
-        await this.pollutionService.getPollutionInNearestCityToCoordinates(
-          coordinatesDto.longitude,
-          coordinatesDto.latitude,
-        );
+        await this.pollutionService.getMostPollutedDateTimeInParis();
 
-      this.logger.log(
-        'GET_POLLUTION_IN_NEARBY_CITY_SUCCESS |' +
-          JSON.stringify(coordinatesDto),
-      );
-
+      this.logger.log('GET_MOST_POLLUTED_DATE_TIME_IN_PARIS_SUCCESS');
       return new SuccessResponseDto(result);
     } catch (error) {
-      this.logger.error(
-        'GET_POLLUTION_IN_NEARBY_CITY_ERROR | ' +
-          JSON.stringify(coordinatesDto),
-      );
+      this.logger.log('GET_MOST_POLLUTED_DATE_TIME_IN_PARIS_ERROR');
 
-      return new ErrorResponseDto('Error : polution data cannot be retrieved.');
+      return new ErrorResponseDto(
+        'Error : cannot return most polluted time in Paris.',
+      );
     }
   }
 }

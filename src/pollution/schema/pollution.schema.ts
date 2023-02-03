@@ -23,5 +23,11 @@ export class Pollution {
 
   @Prop()
   maincn: string;
+
+  @Prop()
+  createdAt: Date;
+
+  @Prop()
+  updatedAt: Date;
 }
 export const PollutionSchema = SchemaFactory.createForClass(Pollution);

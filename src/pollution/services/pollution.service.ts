@@ -31,10 +31,11 @@ export class PollutionService {
   }
 
   async getMostPollutedDateTimeInParis() {
-    const maxPollution = this.pollutionRepository.getMaxPollutionInParis();
+    const maxPollution =
+      await this.pollutionRepository.getMaxPollutionInParis();
 
-    const maxPollutionDateTime = maxPollution.createdAt;
-
-    return maxPollutionDateTime;
+    return {
+      maxPollutionDateTime: maxPollution.createdAt,
+    };
   }
 }
