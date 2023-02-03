@@ -29,14 +29,14 @@
  ## Running The App
 
  First, create a `.env` file from the `.env.example` file  
---
---Then, set the values of the environment variables :  
+
+Then, set the values of the environment variables :  
 
 `APP_PORT` the application port  
 `MONGODB_URL` : MongoDB connection string  
 `IQAIR_API_KEY` : Your IQAIR API key, get it from https://www.iqair.com/fr/dashboard/api  
 
-### Running With Docker
+#### Running With Docker
 
 In the `.env` file, make sure you set the value of the environment variable `MONGODB_EXTERNAL_PORT` to a port number that works for you,  
 
