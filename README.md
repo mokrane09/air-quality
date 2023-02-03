@@ -36,7 +36,7 @@ Then, set the values of the environment variables :
 `MONGODB_URL` : MongoDB connection string  
 `IQAIR_API_KEY` : Your IQAIR API key, get it from https://www.iqair.com/fr/dashboard/api  
 
-#### Running With Docker
+#### With Docker
 
 In the `.env` file, make sure you set the value of the environment variable `MONGODB_EXTERNAL_PORT` to a port number that works for you,  
 
@@ -50,7 +50,7 @@ $ docker-compose up
 
 You application will start running on watch mode and the url is `http://localhost:APP_PORT`
 
-### Running Without Docker
+#### Without Docker
 
 First run the command 
 
