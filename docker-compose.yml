@@ -3,7 +3,7 @@ services:
   db:
     image: mongo
     ports:
-      - 0.0.0.0:27017:27017
+      - 27017:27017
   app:
     build: .
     env_file:
