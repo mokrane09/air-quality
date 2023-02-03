@@ -26,6 +26,8 @@ export class ParisAirQualityCron {
           48.856613,
         );
 
+      this.pollutionRepository.storePollutionData(pollutionData);
+
       this.logger.log('Paris Pollution Data ' + JSON.stringify(pollutionData));
     } catch (error) {
       this.logger.error(

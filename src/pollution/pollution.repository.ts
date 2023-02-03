@@ -17,5 +17,18 @@ export class PollutionRepository {
 
     const pollution = new this.pollutionModel(pollutionData);
     await pollution.save();
+
+    return pollution;
+  }
+
+  async getMaxPollutionInParis() {
+    this.logger.log('Get max pollution in Paris');
+
+    const maxPollution = await this.pollutionModel
+      .findOne()
+      .sort({ aqius: -1 })
+      .limit(1);
+
+    return maxPollution;
   }
 }
