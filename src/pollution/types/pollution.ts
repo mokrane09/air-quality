@@ -1,6 +1,6 @@
 export type Pollution = {
   ts: Date;
-  aquis: number;
+  aqius: number;
   mainus: string;
   aqicn: number;
   maincn: string;
@@ -8,4 +8,9 @@ export type Pollution = {
 
 export type PollutionData = {
   Pollution: Pollution;
+};
+
+export type PollutionDatetime = {
+  maxPollutionDateTime: Date;
+  city: string;
 };

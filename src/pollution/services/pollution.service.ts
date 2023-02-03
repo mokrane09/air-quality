@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { PollutionRepository } from '../pollution.repository';
-import { PollutionData } from '../types/pollution';
+import { AirData } from '../types/iqair-api';
+import { PollutionData, PollutionDatetime } from '../types/pollution';
 import { AirQualityApiService } from './air-quality-api.service';
 
 @Injectable()
@@ -15,27 +16,31 @@ export class PollutionService {
   async getPollutionInNearestCityToCoordinates(
     longitude: number,
     latitude: number,
-  ): Promise<any> {
-    const airData = await this.airQualityApiService.getAirDataInNearestCity(
-      longitude,
-      latitude,
-    );
+  ): Promise<PollutionData> {
+    const airData: AirData =
+      await this.airQualityApiService.getAirDataInNearestCity(
+        longitude,
+        latitude,
+      );
 
     return this.getPollutionDataFromAirData(airData);
   }
 
-  getPollutionDataFromAirData(airData): PollutionData {
+  getPollutionDataFromAirData(airData: AirData): PollutionData {
     return {
       Pollution: airData.current.pollution,
     };
   }
 
-  async getMostPollutedDateTimeInParis() {
+  async getMostPollutedDateTimeInParis(): Promise<PollutionDatetime> {
     const maxPollution =
       await this.pollutionRepository.getMaxPollutionInParis();
 
-    return {
+    const result = {
       maxPollutionDateTime: maxPollution.createdAt,
+      city: maxPollution.city,
     };
+
+    return result;
   }
 }

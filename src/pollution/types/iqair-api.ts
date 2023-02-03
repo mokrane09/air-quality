@@ -1,4 +1,6 @@
-export type NearestCityAirQualityResponseSuccessData = {
+import { Pollution } from './pollution';
+
+export type AirData = {
   city: string;
   state: string;
   country: string;
@@ -7,13 +9,7 @@ export type NearestCityAirQualityResponseSuccessData = {
     coordinates: [number, number];
   };
   current: {
-    pollution: {
-      ts: Date;
-      aqius: number;
-      mainus: string;
-      aqicn: number;
-      maincn: string;
-    };
+    pollution: Pollution;
     weather: {
       ts: Date;
       tp: number;
@@ -26,7 +22,7 @@ export type NearestCityAirQualityResponseSuccessData = {
   };
 };
 
-export type NearestCityAirQualitySuccessRespons = {
+export type AirDataResponse = {
   status: string;
-  date: NearestCityAirQualityResponseSuccessData;
+  data: AirData;
 };

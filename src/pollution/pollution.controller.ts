@@ -59,7 +59,9 @@ export class PollutionController {
     } catch (error) {
       this.logger.error(
         'GET_POLLUTION_IN_NEARBY_CITY_ERROR | ' +
-          JSON.stringify(coordinatesDto),
+          JSON.stringify(coordinatesDto) +
+          ' | Error : ' +
+          error,
       );
 
       return new ErrorResponseDto('Error : polution data cannot be retrieved.');

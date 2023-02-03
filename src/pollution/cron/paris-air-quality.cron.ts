@@ -36,7 +36,8 @@ export class ParisAirQualityCron {
       this.logger.log('Paris Pollution Data ' + JSON.stringify(pollutionData));
     } catch (error) {
       this.logger.error(
-        'Error occured when trying to retrieve Paris air quality data.',
+        'Error occured when trying to retrieve Paris air quality data. | Error : ' +
+          error,
       );
     }
   }
